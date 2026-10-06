@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Responsive To-Do List untuk merencanakan dan memantau aktivitas harian."
+    />
+    <title>To-Do List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">✓</div>
+          <div>
+            <strong>Taskly</strong>
+            <span>Daily Planner</span>
+          </div>
+        </div>
+
+        <nav class="side-nav">
+          <a class="active" href="#dashboard">Dashboard</a>
+          <a href="#todo">My Tasks</a>
+          <a href="#done">Completed</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="mini-profile">
+
+            <img src="assets/prof3.png"
+            alt="Siyam Marjuki" 
+            class="profile-image">
+
+            <div>
+              <strong>Siyam Marjuki</strong>
+              <span>Full Stack <br>
+                Web Developer</span>
+            </div>
+          </div>
+          <p class="sidebar-note">Plan today. Then get it done.</p>
+        </div>
+      </aside>
+
+      <main class="main-content" id="dashboard">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">GOOD DAY 👋</p>
+            <h1>My To-Do List</h1>
+            <p class="subtitle">
+              Atur hari anda dan pastikan prioritas anda tetap jelas..
+            </p>
+          </div>
+
+          <div class="topbar-actions">
+          <button id="themeToggle" class="theme-toggle" type="button">
+          🌙
+          </button>
+          </div>
+
+          <div class="date-card">
+            <span id="dayName">Senin</span>
+            <strong id="todayDate">1 Oktober 2026</strong>
+          </div>
+        </header>
+
+        <section class="stats-grid" aria-label="Ringkasan tugas">
+          <article class="stat-card">
+            <span class="stat-label">Total Tasks</span>
+            <strong id="totalCount">0</strong>
+            <small>semua tugas</small>
+          </article>
+
+
+          <article class="stat-card accent">
+            <span class="stat-label">To Do</span>
+            <strong id="todoCount">0</strong>
+            <small>belum selesai</small>
+          </article>
+
+
+          <article class="stat-card success">
+            <span class="stat-label">Done</span>
+            <strong id="doneCount">0</strong>
+            <small>sudah selesai</small>
+          </article>
+
+
+          <article class="stat-card danger">
+            <span class="stat-label">Overdue</span>
+            <strong id="overdueCount">0</strong>
+            <small>melewati deadline</small>
+          </article>
+        </section>
+
+        <section class="workspace">
+          <div class="card composer-card">
+            <div class="card-heading">
+              <div>
+                <span class="section-kicker">CREATE TASK</span>
+                <h2>What needs to be done?</h2>
+              </div>
+            </div>
+
+            <form id="taskForm">
+              <label for="taskInput">Task</label>
+              <textarea
+                id="taskInput"
+                rows="4"
+                maxlength="180"
+                placeholder="Contoh: Pelajari html selama 1 jam..."
+                required>
+              </textarea>
+
+              <div class="form-row">
+                <div class="field">
+                  <label for="taskDate">Deadline</label>
+                  <input type="date" id="taskDate" required />
+                </div>
+                <div class="field">
+                  <label for="priority">Priority</label>
+                  <select id="priority">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                </div>
+              </div>
+
+              <button class="primary-btn" type="submit">
+                <span>+</span> Add Task
+              </button>
+            </form>
+          </div>
+
+          <div class="card profile-card">
+            <div class="profile-top">
+              <div class="avatar large">SM</div>
+              <div>
+                <span class="section-kicker">PROFILE</span>
+                <h2>Siyam</h2>
+                <p>Full Stack Web Developer</p>
+              </div>
+            </div>
+            <div class="profile-info">
+              <div><span>Focus</span><strong>Development</strong></div>
+              <div>
+                <span>Today</span><strong id="profileDate">06/10/2026</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="tasks-section" id="todo">
+          <div class="section-header">
+            <div>
+              <span class="section-kicker">YOUR PLAN</span>
+              <h2>To Do</h2>
+            </div>
+            <button
+              class="ghost-btn danger-btn"
+              id="deleteAllBtn"
+              type="button"
+            >
+              Delete All
+            </button>
+          </div>
+          <div class="task-list" id="todoList"></div>
+          <div class="empty-state" id="todoEmpty">
+            <div class="empty-icon">✓</div>
+            <h3>Belum ada task</h3>
+            <p>Tambahkan tugas pertama kamu dari form di atas.</p>
+          </div>
+        </section>
+
+        <section class="tasks-section" id="done">
+          <div class="section-header">
+            <div>
+              <span class="section-kicker">FINISHED</span>
+              <h2>Done</h2>
+            </div>
+          </div>
+          <div class="task-list" id="doneList"></div>
+          <div class="empty-state compact" id="doneEmpty">
+            <div class="empty-icon">○</div>
+            <h3>Belum ada task selesai</h3>
+            <p>Checklist task ketika sudah selesai.</p>
+          </div>
+        </section>
+
+        <footer>Mission Besic 4 <br>
+        Pembuatan APK To Do List</footer>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
